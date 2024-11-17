@@ -79,6 +79,8 @@ def main():
     # Display data and visualizations if data is loaded
     if st.session_state.data is not None:
         df = st.session_state.data
+
+        show_metrics(df)
         
         selected_columns = show_column_selector(df)
         # Add this line to display the uploaded CSV
@@ -100,6 +102,7 @@ def main():
                             st.stop()
                     
                     # Phase 2: Setup agent executor
+                    st.divider()
                     with st.spinner("Setting up agent..."):
                         agent_executor = setup_agent_executor(llm)
                         if not agent_executor:
@@ -111,6 +114,8 @@ def main():
                     with st.spinner("Processing search results..."):
                         st.write("Agent executor created")
                         process_queries_with_delay(selected_columns_data, agent_executor, delay_range=(1, 3))
+                    
+                    st.divider()
                     # Save selected_columns_data to a file
                     with open('selected_columns_data.json', 'w') as f:
                         json.dump(selected_columns_data, f, indent=4)
