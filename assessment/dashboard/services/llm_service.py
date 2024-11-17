@@ -87,6 +87,3 @@ def setup_agent_executor(llm):
     except Exception as e:
         st.error(f"Error setting up agent executor: {e}")
         return None
-
-
-# ... Move convert_intermediate_steps, convert_tool, setup_agent_executor here ...
