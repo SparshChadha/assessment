@@ -1,0 +1,21 @@
+# Core dependencies
+streamlit>=1.30.0
+python-dotenv>=1.0.0
+pandas>=2.0.0
+
+# LangChain and LLM dependencies
+langchain>=0.1.0
+langchain-groq>=0.0.1
+langchain-community>=0.0.1
+langchain-core>=0.1.0
+
+# Search capabilities
+duckduckgo-search>=4.1.1
+
+# Data handling
+openpyxl>=3.1.2  # For Excel file support
+streamlit-gsheets>=0.0.1  # For Google Sheets integration
+
+# Utility packages
+python-json>=0.2.0
+requests>=2.31.0 
