@@ -79,7 +79,10 @@ def process_search_queries(selected_columns_data, llm, search_query_prompt, quer
         progress = (i + 1) / total_items
         progress_bar.progress(progress, f"Processing {i+1} of {total_items} entities")
 
-        while True:  # Keep trying until successful
+        max_retries = 3  # Maximum number of retries for empty search_queries
+        retry_count = 0
+
+        while retry_count < max_retries:  # Keep trying until successful or max retries reached
             try:
                 # Generate the prompt
                 prompt = search_query_prompt.format(
@@ -101,13 +104,21 @@ def process_search_queries(selected_columns_data, llm, search_query_prompt, quer
                     if queries_str:
                         queries_list = eval(queries_str)  # eval is safe here as the structure is predefined and controlled
                         entity_data['search_queries'] = queries_list
+                        if queries_list:  # If we got valid queries, break the retry loop
+                            break
                     else:
                         entity_data['search_queries'] = []
                 except Exception as e:
                     # If there's an error in parsing the list, set the search_queries to an empty list
                     entity_data['search_queries'] = []
 
-                            
+                # If search_queries is empty, increment retry counter
+                if not entity_data.get('search_queries'):
+                    retry_count += 1
+                    st.warning(f"Empty search queries for item {i+1}, attempt {retry_count}/{max_retries}")
+                    time.sleep(2)
+                    continue
+                
                 time.sleep(2)  # Base rate limiting
                 break  # Success, move to next entity
 
@@ -120,7 +131,10 @@ def process_search_queries(selected_columns_data, llm, search_query_prompt, quer
                     st.error(f"Error processing query at entity {i+1}: {e}")
                     entity_data['search_queries'] = []
                     break  # Move to the next entity for non-rate-limit errors
+        if retry_count == max_retries:
+            st.error(f"Failed to get valid search queries for item {i+1} after {max_retries} attempts")
 
+    
     st.write("Finished processing all entities.")
     return True
 
@@ -137,7 +151,7 @@ def process_queries_with_delay(entities, agent_executor, delay_range=(0, 7), max
             # Update entity progress
             entity_progress.progress(
                 entity_idx / total_entities, 
-                f"Processing {entity.get('County', 'Unknown')} ({entity_idx + 1}/{total_entities})"
+                f"Processing({entity_idx + 1}/{total_entities})"
             )
             
             entity['one_value'] = []
