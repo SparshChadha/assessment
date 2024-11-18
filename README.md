@@ -135,16 +135,6 @@ GROQ_API_KEY_2 = your_second_groq_api_key
 streamlit run dashboard/main.py
 ```
 
-### Advanced Query Configuration
-```python
-# Example of configuring advanced queries
-{
-    "query_type": "company_info",
-    "fields": ["email", "address", "phone"],
-    "validation": "strict"
-}
-```
-
 ## 🔍 Implementation Details
 
 ### Query Processing Pipeline
