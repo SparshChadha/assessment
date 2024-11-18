@@ -117,12 +117,12 @@ def main():
                     
                     st.divider()
                     # Save selected_columns_data to a file
-                    with open('selected_columns_data.json', 'w') as f:
-                        json.dump(selected_columns_data, f, indent=4)
                     # Phase 4: Final processing and CSV generation
                     with st.spinner("Generating final results..."):
                         if not final_processing(selected_columns_data, llm2, behaviour_control):
                             st.stop()
+                    with open('selected_columns_data.json', 'w') as f:
+                        json.dump(selected_columns_data, f, indent=4)
             else:
                 st.warning("No data to process from selected columns")
         else:
