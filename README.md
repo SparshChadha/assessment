@@ -133,13 +133,6 @@ GROQ_API_KEY_2 = your_second_groq_api_key
 
 ```
 streamlit run dashboard/main.py
-
-## 📊 Usage Examples
-
-### Basic Usage
-```python
-# Example of using the dashboard for basic data extraction
-streamlit run dashboard/main.py
 ```
 
 ### Advanced Query Configuration
