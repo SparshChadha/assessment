@@ -1,5 +1,9 @@
 # AI Data Extraction Dashboard
 
+## Video demonstration
+
+https://github.com/user-attachments/assets/3fa5f8d4-c3b8-4fa2-95a1-926602d77093
+
 A sophisticated, Streamlit-based dashboard that leverages dual LLM processing and advanced search capabilities to extract structured information from web sources. This implementation goes beyond basic requirements with several innovative features and architectural decisions.
 
 ## 🌟 Unique Features & Enhancements
