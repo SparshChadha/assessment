@@ -7,6 +7,7 @@ import os
 import groq
 import csv
 from langchain.prompts import ChatPromptTemplate
+import logging
 
 behaviour_control = ChatPromptTemplate.from_messages([
     ("system", """You are a precise data extraction assistant. You must:
@@ -115,7 +116,7 @@ def process_search_queries(selected_columns_data, llm, search_query_prompt, quer
                 # If search_queries is empty, increment retry counter
                 if not entity_data.get('search_queries'):
                     retry_count += 1
-                    st.warning(f"Empty search queries for item {i+1}, attempt {retry_count}/{max_retries}")
+                    logging.warning(f"Empty search queries for item {i+1}, attempt {retry_count}/{max_retries}")
                     time.sleep(2)
                     continue
                 
@@ -124,18 +125,20 @@ def process_search_queries(selected_columns_data, llm, search_query_prompt, quer
 
             except Exception as e:
                 if "rate_limit_exceeded" in str(e).lower():
-                    st.warning(f"Rate limit reached at item {i+1}/{len(selected_columns_data)}. Waiting 3 seconds...")
+                    logging.warning(f"Rate limit reached at item {i+1}/{len(selected_columns_data)}. Waiting 3 seconds...")
                     time.sleep(3)
                     continue  # Retry the same entity
                 else:
-                    st.error(f"Error processing query at entity {i+1}: {e}")
+                    logging.error(f"Error processing query at entity {i+1}: {e}")
                     entity_data['search_queries'] = []
                     break  # Move to the next entity for non-rate-limit errors
         if retry_count == max_retries:
-            st.error(f"Failed to get valid search queries for item {i+1} after {max_retries} attempts")
+            logging.error(f"Failed to get valid search queries for item {i+1} after {max_retries} attempts")
+            # # Optionally show a less detailed message to the user
+            # st.warning("Some items could not be processed. Check the logs for details.")
 
     
-    st.write("Finished processing all entities.")
+    st.success("Finished processing all entities.")
     return True
 
 def process_queries_with_delay(entities, agent_executor, delay_range=(0, 7), max_queries=3):
