@@ -7,64 +7,6 @@ https://github.com/user-attachments/assets/3fa5f8d4-c3b8-4fa2-95a1-926602d77093
 
 A sophisticated, Streamlit-based dashboard that leverages dual LLM processing and advanced search capabilities to extract structured information from web sources. This implementation goes beyond basic requirements with several innovative features and architectural decisions.
 
-## 🌟 Unique Features & Enhancements
-
-### 1. Dual LLM Processing Architecture
-- **Load Balanced LLM Processing**: Utilizes two separate Groq API keys for different processing stages:
-  - First LLM: Handles initial query generation and optimization
-  - Second LLM: Manages final result processing and formatting
-- **Benefits**: Improved reliability, better rate limit handling, and parallel processing capabilities
-
-### 2. Advanced Query Processing
-- **Multi-Stage Query Pipeline**:
-  1. Initial query generation with context awareness
-  2. Search execution with DuckDuckGo integration
-  3. Result processing with behavioral controls
-  4. Final formatting with strict output validation
-
-### 3. Robust Error Handling
-- **Rate Limit Management**: Intelligent retry mechanism with exponential backoff
-- **Query Validation**: Pre-execution validation to prevent unnecessary API calls
-- **Result Verification**: Multi-stage verification of extracted data
-
-### 4. Enhanced Data Processing
-- **Column Selection Intelligence**: 
-  - Smart column type detection
-  - Multi-column correlation support
-  - Dynamic query adjustment based on selected columns
-
-### 5. Progress Tracking
-- **Detailed Progress Monitoring**:
-  - Entity-level progress bars
-  - Query-specific status updates
-  - Real-time processing statistics
-
-### 6. Structured Output Control
-- **Strict Output Formatting**:
-  - Consistent JSON/List structure
-  - Type validation for extracted data
-  - Automated data cleaning and formatting
-
-## 🔧 Technical Improvements
-
-### Architecture
-- **Modular Component Design**:
-  - Separate services for data processing, LLM interaction, and CSV handling
-  - Clean separation of concerns between UI and business logic
-  - Extensible plugin architecture for future enhancements
-
-### Performance
-- **Optimized Processing**:
-  - Batch processing capabilities
-  - Caching of intermediate results
-  - Efficient memory management for large datasets
-
-### Security
-- **Enhanced Security Measures**:
-  - API key rotation support
-  - Rate limit monitoring
-  - Secure credential management
-
 ## 🚀 Getting Started
 
 ## Project Description
@@ -157,7 +99,65 @@ streamlit run dashboard/main.py
    - Multi-stage validation
    - Format standardization
    - Quality checks
+## 🌟 Unique Features & Enhancements
 
+### 1. Dual LLM Processing Architecture
+- **Load Balanced LLM Processing**: Utilizes two separate Groq API keys for different processing stages:
+  - First LLM: Handles initial query generation and optimization
+  - Second LLM: Manages final result processing and formatting
+- **Benefits**: Improved reliability, better rate limit handling, and parallel processing capabilities
+
+### 2. Advanced Query Processing
+- **Multi-Stage Query Pipeline**:
+  1. Initial query generation with context awareness
+  2. Search execution with DuckDuckGo integration
+  3. Result processing with behavioral controls
+  4. Final formatting with strict output validation
+
+### 3. Robust Error Handling
+- **Rate Limit Management**: Intelligent retry mechanism with exponential backoff
+- **Query Validation**: Pre-execution validation to prevent unnecessary API calls
+- **Result Verification**: Multi-stage verification of extracted data
+
+### 4. Enhanced Data Processing
+- **Column Selection Intelligence**: 
+  - Smart column type detection
+  - Multi-column correlation support
+  - Dynamic query adjustment based on selected columns
+
+### 5. Progress Tracking
+- **Detailed Progress Monitoring**:
+  - Entity-level progress bars
+  - Query-specific status updates
+  - Real-time processing statistics
+
+### 6. Structured Output Control
+- **Strict Output Formatting**:
+  - Consistent JSON/List structure
+  - Type validation for extracted data
+  - Automated data cleaning and formatting
+
+## 🔧 Technical Improvements
+
+### Architecture
+- **Modular Component Design**:
+  - Separate services for data processing, LLM interaction, and CSV handling
+  - Clean separation of concerns between UI and business logic
+  - Extensible plugin architecture for future enhancements
+
+### Performance
+- **Optimized Processing**:
+  - Batch processing capabilities
+  - Caching of intermediate results
+  - Efficient memory management for large datasets
+
+### Security
+- **Enhanced Security Measures**:
+  - API key rotation support
+  - Rate limit monitoring
+  - Secure credential management
+
+    
 ## 🎯 Future Enhancements
 ### LLM and Training Improvements
 - **Enhanced Training Dataset**:
